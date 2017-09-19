@@ -1,9 +1,15 @@
 <template>
-  <div class="canton-wrapper">
-    <div class="canton" v-for="canton in randomizeList(cantons)" :class="canton.code">
-      <h4>{{canton.code}}</h4>
-      <img :src="canton.img" :alt="canton.code" @click="select($event)">
+  <div class="wrapper">
+    <div class="canton-wrapper">
+      <div class="canton" v-for="canton in randomizeList(cantons)" :data-code="canton.code">
+        <h4>{{canton.code}}</h4>
+        <img :src="canton.img" :alt="canton.code" @click="checkGuess($event)">
+      </div>
     </div>
+    <!-- <div>Fails = {{fails}}</div>  this is not how i should do it-->
+    <ul>
+      <li>print out cantons -> change the array</li>
+    </ul>
   </div>
 </template>
 
@@ -15,264 +21,268 @@ export default {
         {
           code: 'AG',
           name: 'Aargau',
-          img: 'src/assets/AG.png'
+          img: 'src/assets/AG.svg'
         },
         {
           code: 'AI',
           name: 'Appenzell Innerrhoden',
-          img: 'src/assets/AI.png'
+          img: 'src/assets/AI.svg'
         },
         {
           code: 'AR',
           name: 'Appenzell Ausserrhoden',
-          img: 'src/assets/AR.png'
+          img: 'src/assets/AR.svg'
         },
         {
           code: 'BE',
           name: 'Bern',
-          img: 'src/assets/BE.png'
+          img: 'src/assets/BE.svg'
         },
         {
           code: 'BL',
           name: 'Basel-Landschaft',
-          img: 'src/assets/BL.png'
+          img: 'src/assets/BL.svg'
         },
         {
           code: 'BS',
           name: 'Basel-Stadt',
-          img: 'src/assets/BS.png'
+          img: 'src/assets/BS.svg'
         },
         {
           code: 'FR',
           name: 'Fribourg',
-          img: 'src/assets/FR.png'
+          img: 'src/assets/FR.svg'
         },
         {
           code: 'GE',
           name: 'Genève',
-          img: 'src/assets/GE.png'
+          img: 'src/assets/GE.svg'
         },
         {
           code: 'GL',
           name: 'Glarus',
-          img: 'src/assets/GL.png'
+          img: 'src/assets/GL.svg'
         },
         {
           code: 'GR',
           name: 'Grisons',
-          img: 'src/assets/GR.png'
+          img: 'src/assets/GR.svg'
         },
         {
           code: 'JU',
           name: 'Jura',
-          img: 'src/assets/JU.png'
+          img: 'src/assets/JU.svg'
         },
         {
           code: 'LU',
           name: 'Lucerne',
-          img: 'src/assets/LU.png'
+          img: 'src/assets/LU.svg'
         },
         {
           code: 'NE',
           name: 'Neuchâtel',
-          img: 'src/assets/NE.png'
+          img: 'src/assets/NE.svg'
         },
         {
           code: 'NW',
           name: 'Nidwalden',
-          img: 'src/assets/NW.png'
+          img: 'src/assets/NW.svg'
         },
         {
           code: 'OW',
           name: 'Obwalden',
-          img: 'src/assets/OW.png'
+          img: 'src/assets/OW.svg'
         },
         {
           code: 'SG',
           name: 'St. Gallen',
-          img: 'src/assets/SG.png'
+          img: 'src/assets/SG.svg'
         },
         {
           code: 'SH',
           name: 'Schaffhausen',
-          img: 'src/assets/SH.png'
+          img: 'src/assets/SH.svg'
         },
         {
           code: 'SO',
           name: 'Solothurn',
-          img: 'src/assets/SO.png'
+          img: 'src/assets/SO.svg'
         },
         {
           code: 'SZ',
           name: 'Schwyz',
-          img: 'src/assets/SZ.png'
+          img: 'src/assets/SZ.svg'
         },
         {
           code: 'TG',
           name: 'Thurgau',
-          img: 'src/assets/TG.png'
+          img: 'src/assets/TG.svg'
         },
         {
           code: 'TI',
           name: 'Ticino',
-          img: 'src/assets/TI.png'
+          img: 'src/assets/TI.svg'
         },
         {
           code: 'UR',
           name: 'Uri',
-          img: 'src/assets/UR.png'
+          img: 'src/assets/UR.svg'
         },
         {
           code: 'VD',
           name: 'Vaud',
-          img: 'src/assets/VD.png'
+          img: 'src/assets/VD.svg'
         },
         {
           code: 'VS',
           name: 'Valais',
-          img: 'src/assets/VS.png'
+          img: 'src/assets/VS.svg'
         },
         {
           code: 'ZG',
           name: 'Zug',
-          img: 'src/assets/ZG.png'
+          img: 'src/assets/ZG.svg'
         },
         {
           code: 'ZH',
           name: 'Zürich',
-          img: 'src/assets/ZG.png'
+          img: 'src/assets/ZH.svg'
         },
         {
           code: 'AG',
           name: 'Aargau',
-          img: 'src/assets/AG.png'
+          img: 'src/assets/AG.svg'
         },
         {
           code: 'AI',
           name: 'Appenzell Innerrhoden',
-          img: 'src/assets/AI.png'
+          img: 'src/assets/AI.svg'
         },
         {
           code: 'AR',
           name: 'Appenzell Ausserrhoden',
-          img: 'src/assets/AR.png'
+          img: 'src/assets/AR.svg'
         },
         {
           code: 'BE',
           name: 'Bern',
-          img: 'src/assets/BE.png'
+          img: 'src/assets/BE.svg'
         },
         {
           code: 'BL',
           name: 'Basel-Landschaft',
-          img: 'src/assets/BL.png'
+          img: 'src/assets/BL.svg'
         },
         {
           code: 'BS',
           name: 'Basel-Stadt',
-          img: 'src/assets/BS.png'
+          img: 'src/assets/BS.svg'
         },
         {
           code: 'FR',
           name: 'Fribourg',
-          img: 'src/assets/FR.png'
+          img: 'src/assets/FR.svg'
         },
         {
           code: 'GE',
           name: 'Genève',
-          img: 'src/assets/GE.png'
+          img: 'src/assets/GE.svg'
         },
         {
           code: 'GL',
           name: 'Glarus',
-          img: 'src/assets/GL.png'
+          img: 'src/assets/GL.svg'
         },
         {
           code: 'GR',
           name: 'Grisons',
-          img: 'src/assets/GR.png'
+          img: 'src/assets/GR.svg'
         },
         {
           code: 'JU',
           name: 'Jura',
-          img: 'src/assets/JU.png'
+          img: 'src/assets/JU.svg'
         },
         {
           code: 'LU',
           name: 'Lucerne',
-          img: 'src/assets/LU.png'
+          img: 'src/assets/LU.svg'
         },
         {
           code: 'NE',
           name: 'Neuchâtel',
-          img: 'src/assets/NE.png'
+          img: 'src/assets/NE.svg'
         },
         {
           code: 'NW',
           name: 'Nidwalden',
-          img: 'src/assets/NW.png'
+          img: 'src/assets/NW.svg'
         },
         {
           code: 'OW',
           name: 'Obwalden',
-          img: 'src/assets/OW.png'
+          img: 'src/assets/OW.svg'
         },
         {
           code: 'SG',
           name: 'St. Gallen',
-          img: 'src/assets/SG.png'
+          img: 'src/assets/SG.svg'
         },
         {
           code: 'SH',
           name: 'Schaffhausen',
-          img: 'src/assets/SH.png'
+          img: 'src/assets/SH.svg'
         },
         {
           code: 'SO',
           name: 'Solothurn',
-          img: 'src/assets/SO.png'
+          img: 'src/assets/SO.svg'
         },
         {
           code: 'SZ',
           name: 'Schwyz',
-          img: 'src/assets/SZ.png'
+          img: 'src/assets/SZ.svg'
         },
         {
           code: 'TG',
           name: 'Thurgau',
-          img: 'src/assets/TG.png'
+          img: 'src/assets/TG.svg'
         },
         {
           code: 'TI',
           name: 'Ticino',
-          img: 'src/assets/TI.png'
+          img: 'src/assets/TI.svg'
         },
         {
           code: 'UR',
           name: 'Uri',
-          img: 'src/assets/UR.png'
+          img: 'src/assets/UR.svg'
         },
         {
           code: 'VD',
           name: 'Vaud',
-          img: 'src/assets/VD.png'
+          img: 'src/assets/VD.svg'
         },
         {
           code: 'VS',
           name: 'Valais',
-          img: 'src/assets/VS.png'
+          img: 'src/assets/VS.svg'
         },
         {
           code: 'ZG',
           name: 'Zug',
-          img: 'src/assets/ZG.png'
+          img: 'src/assets/ZG.svg'
         },
         {
           code: 'ZH',
           name: 'Zürich',
-          img: 'src/assets/ZG.png'
+          img: 'src/assets/ZH.svg'
         }
-      ]
+      ],
+      guess1: '',
+      guess2: '',
+      count: 0,
+      fails: 0,
     }
   },
   methods: {
@@ -291,9 +301,48 @@ export default {
       }
       return myRandomizedList;
     },
-    select: function(event) {
-      event.target.parentElement.classList.add('shown');
+    checkGuess: function(event) {
+      let el = event.target.parentElement;
+
+      if ((this.count < 2) && (!el.classList.contains('faceUp'))) {
+        this.count += 1;
+        el.classList.add('faceUp');
+        // first guess
+        if (this.count === 1) {
+          this.guess1 = el.dataset.code;
+        }
+        // second guess
+        else {
+          this.guess2 = el.dataset.code;
+          // if match
+          if (this.guess1 === this.guess2) {
+            const matched = document.querySelectorAll(`[data-code="${el.dataset.code}"]`);
+            for (let card of matched) {
+              card.className += ' matched';
+            }
+            // checkGameFinished();
+          }
+          // else fail
+          else {
+            const facedUp = document.querySelectorAll('.faceUp:not(.matched)');
+            setTimeout(() => {
+              for (let card of facedUp) {
+                card.className = 'canton';
+              }
+            }, 800);
+            this.fails += 1;
+            console.log(`fails: ${this.fails}`);
+            // checkGameFinished();
+          }
+
+          // reset
+          this.count = 0;
+        }
+      }
     },
+    checkGameFinished: function() {
+      console.log('game not finished!');
+    }
   }
 }
 </script>
@@ -310,19 +359,51 @@ export default {
 h3,
 h4 {
   margin: 0px;
+  opacity: 0;
 }
 
 .canton {
-  width: 130px;
-  height: 130px;
+  width: 100px;
+  height: 100px;
   margin-bottom: 4px;
-  background-color: #FFF;
   box-shadow: 1px 1px 6px 0px rgba(107, 107, 107, 0.15);
   border-radius: 3px;
+  background-image: url('../assets/switzerland.svg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 
-.shown {
+img {
+  opacity: 0;
+}
+
+.faceUp img,
+.matched img {
+  opacity: 1;
+}
+
+.faceUp {
   background-color: #ddd;
+}
+
+.matched {
+  opacity: 0.5;
+  background-color: #ddd;
+}
+
+.faceUp,
+.matched {
+  background-image: none;
+  background-color: #FFF;
+}
+
+.matched h4 {
+  opacity: 1;
+}
+
+.matched img {
+  filter: grayscale(1);
 }
 
 img {
