@@ -1,0 +1,262 @@
+[
+  {
+    "code": "AG",
+    "name": "Aargau",
+    "img": "src/assets/AG.svg"
+  },
+  {
+    "code": "AI",
+    "name": "Appenzell Innerrhoden",
+    "img": "src/assets/AI.svg"
+  },
+  {
+    "code": "AR",
+    "name": "Appenzell Ausserrhoden",
+    "img": "src/assets/AR.svg"
+  },
+  {
+    "code": "BE",
+    "name": "Bern",
+    "img": "src/assets/BE.svg"
+  },
+  {
+    "code": "BL",
+    "name": "Basel-Landschaft",
+    "img": "src/assets/BL.svg"
+  },
+  {
+    "code": "BS",
+    "name": "Basel-Stadt",
+    "img": "src/assets/BS.svg"
+  },
+  {
+    "code": "FR",
+    "name": "Fribourg",
+    "img": "src/assets/FR.svg"
+  },
+  {
+    "code": "GE",
+    "name": "Genève",
+    "img": "src/assets/GE.svg"
+  },
+  {
+    "code": "GL",
+    "name": "Glarus",
+    "img": "src/assets/GL.svg"
+  },
+  {
+    "code": "GR",
+    "name": "Grisons",
+    "img": "src/assets/GR.svg"
+  },
+  {
+    "code": "JU",
+    "name": "Jura",
+    "img": "src/assets/JU.svg"
+  },
+  {
+    "code": "LU",
+    "name": "Lucerne",
+    "img": "src/assets/LU.svg"
+  },
+  {
+    "code": "NE",
+    "name": "Neuchâtel",
+    "img": "src/assets/NE.svg"
+  },
+  {
+    "code": "NW",
+    "name": "Nidwalden",
+    "img": "src/assets/NW.svg"
+  },
+  {
+    "code": "OW",
+    "name": "Obwalden",
+    "img": "src/assets/OW.svg"
+  },
+  {
+    "code": "SG",
+    "name": "St. Gallen",
+    "img": "src/assets/SG.svg"
+  },
+  {
+    "code": "SH",
+    "name": "Schaffhausen",
+    "img": "src/assets/SH.svg"
+  },
+  {
+    "code": "SO",
+    "name": "Solothurn",
+    "img": "src/assets/SO.svg"
+  },
+  {
+    "code": "SZ",
+    "name": "Schwyz",
+    "img": "src/assets/SZ.svg"
+  },
+  {
+    "code": "TG",
+    "name": "Thurgau",
+    "img": "src/assets/TG.svg"
+  },
+  {
+    "code": "TI",
+    "name": "Ticino",
+    "img": "src/assets/TI.svg"
+  },
+  {
+    "code": "UR",
+    "name": "Uri",
+    "img": "src/assets/UR.svg"
+  },
+  {
+    "code": "VD",
+    "name": "Vaud",
+    "img": "src/assets/VD.svg"
+  },
+  {
+    "code": "VS",
+    "name": "Valais",
+    "img": "src/assets/VS.svg"
+  },
+  {
+    "code": "ZG",
+    "name": "Zug",
+    "img": "src/assets/ZG.svg"
+  },
+  {
+    "code": "ZH",
+    "name": "Zürich",
+    "img": "src/assets/ZH.svg"
+  },
+  {
+    "code": "AG",
+    "name": "Aargau",
+    "img": "src/assets/AG.svg"
+  },
+  {
+    "code": "AI",
+    "name": "Appenzell Innerrhoden",
+    "img": "src/assets/AI.svg"
+  },
+  {
+    "code": "AR",
+    "name": "Appenzell Ausserrhoden",
+    "img": "src/assets/AR.svg"
+  },
+  {
+    "code": "BE",
+    "name": "Bern",
+    "img": "src/assets/BE.svg"
+  },
+  {
+    "code": "BL",
+    "name": "Basel-Landschaft",
+    "img": "src/assets/BL.svg"
+  },
+  {
+    "code": "BS",
+    "name": "Basel-Stadt",
+    "img": "src/assets/BS.svg"
+  },
+  {
+    "code": "FR",
+    "name": "Fribourg",
+    "img": "src/assets/FR.svg"
+  },
+  {
+    "code": "GE",
+    "name": "Genève",
+    "img": "src/assets/GE.svg"
+  },
+  {
+    "code": "GL",
+    "name": "Glarus",
+    "img": "src/assets/GL.svg"
+  },
+  {
+    "code": "GR",
+    "name": "Grisons",
+    "img": "src/assets/GR.svg"
+  },
+  {
+    "code": "JU",
+    "name": "Jura",
+    "img": "src/assets/JU.svg"
+  },
+  {
+    "code": "LU",
+    "name": "Lucerne",
+    "img": "src/assets/LU.svg"
+  },
+  {
+    "code": "NE",
+    "name": "Neuchâtel",
+    "img": "src/assets/NE.svg"
+  },
+  {
+    "code": "NW",
+    "name": "Nidwalden",
+    "img": "src/assets/NW.svg"
+  },
+  {
+    "code": "OW",
+    "name": "Obwalden",
+    "img": "src/assets/OW.svg"
+  },
+  {
+    "code": "SG",
+    "name": "St. Gallen",
+    "img": "src/assets/SG.svg"
+  },
+  {
+    "code": "SH",
+    "name": "Schaffhausen",
+    "img": "src/assets/SH.svg"
+  },
+  {
+    "code": "SO",
+    "name": "Solothurn",
+    "img": "src/assets/SO.svg"
+  },
+  {
+    "code": "SZ",
+    "name": "Schwyz",
+    "img": "src/assets/SZ.svg"
+  },
+  {
+    "code": "TG",
+    "name": "Thurgau",
+    "img": "src/assets/TG.svg"
+  },
+  {
+    "code": "TI",
+    "name": "Ticino",
+    "img": "src/assets/TI.svg"
+  },
+  {
+    "code": "UR",
+    "name": "Uri",
+    "img": "src/assets/UR.svg"
+  },
+  {
+    "code": "VD",
+    "name": "Vaud",
+    "img": "src/assets/VD.svg"
+  },
+  {
+    "code": "VS",
+    "name": "Valais",
+    "img": "src/assets/VS.svg"
+  },
+  {
+    "code": "ZG",
+    "name": "Zug",
+    "img": "src/assets/ZG.svg"
+  },
+  {
+    "code": "ZH",
+    "name": "Zürich",
+    "img": "src/assets/ZH.svg"
+  }
+]
