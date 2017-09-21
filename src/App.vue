@@ -6,14 +6,17 @@
       <img class="switzerland" src="./assets/switzerland.svg">
     </div>
     <canton></canton>
+    <stopwatch></stopwatch>
   </div>
 </template>
 
 <script>
 import Canton from './components/Canton.vue';
+import Stopwatch from './components/Stopwatch.vue';
 export default {
   components: {
-    Canton
+    Canton,
+    Stopwatch
   },
   name: 'app',
   data() {
