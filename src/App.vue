@@ -21,7 +21,7 @@ export default {
   name: 'app',
   data() {
     return {
-      msg: 'Learning Vue.js - Swiss cantons memory game'
+      msg: 'Swiss cantons memory game'
     }
   }
 }
@@ -35,7 +35,7 @@ export default {
   text-align: center;
   color: #2c3e50;
   background-color: #ddd;
-  height: 100%;
+  // height: 100%;
 }
 
 .header {
