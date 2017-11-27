@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <div class="canton-wrapper">
-      <div class="canton" v-for="(canton, index) in shuffleArrayTwice(cantons)" :data-code="canton.code" :data-matched="canton.matched" :data-faceup="canton.faceUp" @click="checkGuess($event)">
+      <div class="canton" v-for="(canton, index) in shuffleArrayTwice(cantons)" :data-code="canton.code" :data-matched="canton.matched" :data-faceup="canton.faceUp" @click="handleClick($event)">
         <transition-group name="fade" mode="out-in">
           <div class="swissflag" key="1"></div>
           <img :src="canton.img" :alt="canton.code" key="2">
@@ -9,13 +9,14 @@
       </div>
     </div>
     <ul>
-      <li v-for="canton in cantons" :data-code="canton.code" :data-matched="canton.matched">{{canton.name}}</li>
+      <li v-for="(canton, key) in cantonsOnce(cantons)" :data-code="canton.code" :data-matched="canton.matched">{{canton.name}}</li>
     </ul>
   </div>
 </template>
 
 <script>
 import cantons from '../assets/cantons.json';
+import bus from "../bus.js";
 export default {
   data() {
     return {
@@ -24,41 +25,46 @@ export default {
       guess2: '',
       count: 0,
       wait: false,
+      started: false
     }
   },
+  mounted: function() {
+    bus.$on("startAppToCanton", function() {
+      bus.$emit("startTimer");
+    });
+  },
   methods: {
+    handleClick: function(event) {
+      if(this.started === false) {
+        this.started = true;
+        this.startGame();
+      }
+      this.checkGuess(event);
+    },
+    startGame: function() {
+      bus.$emit("startGame");
+    },
+    cantonsOnce: function() {
+      return this.cantons.filter(function(canton, key) {
+        return key < 26;
+      })
+    },
     shuffleArrayTwice: function(array) {
       let newArray = array.slice();
-      // let newArray2 = array.slice()
       for (var i = newArray.length - 1; i > 0; i--) {
         var rand = Math.floor(Math.random() * (i + 1));
         [newArray[i], newArray[rand]] = [newArray[rand], newArray[i]];
       }
       return newArray;
-      // for (var i = newArray2.length - 1; i > 0; i--) {
-      //   var rand = Math.floor(Math.random() * (i + 1));
-      //   [newArray2[i], newArray2[rand]] = [newArray2[rand], newArray2[i]];
-      // }
-      // let bothArrays = newArray.concat(newArray2);
-      // for (var i = bothArrays.length - 1; i > 0; i--) {
-      //   var rand = Math.floor(Math.random() * (i + 1));
-      //   [bothArrays[i], bothArrays[rand]] = [bothArrays[rand], bothArrays[i]];
-      // }
-      // return bothArrays;
     },
     finishGame: function() {
       console.log('ggwp!');
     },
     checkGuess: function(event) {
       let el = event.target;
-      // console.log(this.data);
-      // console.log(this.faceUp);
-
-      // dont execute code if canton is faceup or waiting to turn back over
       if ((el.dataset.faceup == 0) && (this.wait === false)) {
         if ((this.count < 2)) {
           if (this.count == 0) {
-            // console.log('turn back over');
           }
           this.count += 1;
           // first guess
@@ -114,18 +120,14 @@ export default {
 <style scoped>
 .wrapper {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
 }
 .canton-wrapper {
-  /* display: flex; */
-  /* flex-wrap: wrap; */
-  /* justify-content: space-between; */
-  /* width: 90%; */
-  margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(8, 100px);
   grid-template-rows: repeat(7, 100px);
   grid-gap: 10px;
+  margin-right: 20px;
 }
 
 h3,
@@ -158,7 +160,6 @@ h4 {
 }
 
 .swissflag {
-  /* opacity: 0.3; */
   pointer-events: none;
   position: absolute;
   top: 0;
@@ -183,15 +184,13 @@ img {
 }
 
 ul {
+  margin-top: 0px;
   padding-left: 0;
   list-style-type: none;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   flex-wrap: wrap;
-  width: 90%;
-  margin: 40px auto;
-  max-height: 150px;
 }
 
 li[data-matched="1"] {

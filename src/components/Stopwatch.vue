@@ -1,5 +1,5 @@
 <template>
-  <span id="time" v-html="time">
+  <span id="time" v-html="time" @click="startFFS">
   </span>
 </template>
 
@@ -8,10 +8,12 @@
 </style>
 
 <script>
-module.exports = {
-  data: function() {
+import bus from "../bus.js";
+
+export default {
+  data() {
     return {
-      clockstate: "paused",
+      clockstate: "stopped",
       startTime: Date.now(),
       currentTime: Date.now(),
       interval: null
@@ -19,13 +21,17 @@ module.exports = {
   },
   mounted: function() {
     this.interval = setInterval(this.updateCurrentTime, 1);
+    bus.$on("startTimer", function() {
+      // wtf is wrong here, I can't access any data. Oh well,..
+      ffs();
+    });
   },
   destroyed: function() {
     clearInterval(this.interval)
   },
   computed: {
     time: function() {
-      return this.minutes + ':' + this.seconds + ':' + Number(String((this.milliseconds % 1000)).charAt(0));
+      return this.minutes + ':' + this.seconds;
     },
     milliseconds: function() {
       return this.currentTime - this.$data.startTime;
@@ -42,6 +48,9 @@ module.exports = {
     }
   },
   methods: {
+    startFFS: function() {
+      this.clockstate = "started";
+    },
     reset: function() {
       this.$data.clockstate = "started";
       this.$data.startTime = Date.now();
@@ -52,6 +61,9 @@ module.exports = {
         this.currentTime = Date.now();
       }
     }
-  }
-} 
+  },
+}
+function ffs() {
+  document.querySelector('#time').click();
+}
 </script>
