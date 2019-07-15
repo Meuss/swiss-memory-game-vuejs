@@ -1,32 +1,45 @@
 <template>
   <div class="wrapper">
     <div class="canton-wrapper">
-      <div class="canton" v-for="(canton, index) in shuffleArrayTwice(cantons)" :data-code="canton.code" :data-matched="canton.matched" :data-faceup="canton.faceUp" @click="handleClick($event)">
+      <div
+        class="canton"
+        v-for="(canton, index) in shuffleArrayTwice(cantons)"
+        :data-code="canton.code"
+        :data-matched="canton.matched"
+        :data-faceup="canton.faceUp"
+        @click="handleClick($event)"
+      >
         <transition-group name="fade" mode="out-in">
           <div class="swissflag" key="1"></div>
-          <img :src="canton.img" :alt="canton.code" key="2">
+          <img :src="canton.img" :alt="canton.code" key="2" />
         </transition-group>
       </div>
     </div>
     <ul>
-      <li v-for="(canton, key) in cantonsOnce(cantons)" :data-code="canton.code" :data-matched="canton.matched">{{canton.name}}</li>
+      <li
+        v-for="(canton, key) in cantonsOnce(cantons)"
+        :data-code="canton.code"
+        :data-matched="canton.matched"
+      >
+        {{ canton.name }}
+      </li>
     </ul>
   </div>
 </template>
 
 <script>
-import cantons from '../assets/cantons.json';
+import cantons from "../assets/cantons.json";
 import bus from "../bus.js";
 export default {
   data() {
     return {
       cantons: cantons,
-      guess1: '',
-      guess2: '',
+      guess1: "",
+      guess2: "",
       count: 0,
       wait: false,
       started: false
-    }
+    };
   },
   mounted: function() {
     bus.$on("startAppToCanton", function() {
@@ -35,7 +48,7 @@ export default {
   },
   methods: {
     handleClick: function(event) {
-      if(this.started === false) {
+      if (this.started === false) {
         this.started = true;
         this.startGame();
       }
@@ -47,7 +60,7 @@ export default {
     cantonsOnce: function() {
       return this.cantons.filter(function(canton, key) {
         return key < 26;
-      })
+      });
     },
     shuffleArrayTwice: function(array) {
       let newArray = array.slice();
@@ -58,12 +71,12 @@ export default {
       return newArray;
     },
     finishGame: function() {
-      console.log('ggwp!');
+      console.log("ggwp!");
     },
     checkGuess: function(event) {
       let el = event.target;
-      if ((el.dataset.faceup == 0) && (this.wait === false)) {
-        if ((this.count < 2)) {
+      if (el.dataset.faceup == 0 && this.wait === false) {
+        if (this.count < 2) {
           if (this.count == 0) {
           }
           this.count += 1;
@@ -80,24 +93,32 @@ export default {
             // if match
             if (this.guess1 === this.guess2) {
               this.wait = false;
-              const matchedGuess = document.querySelectorAll(`.canton[data-faceup='1']`);
+              const matchedGuess = document.querySelectorAll(
+                `.canton[data-faceup='1']`
+              );
               // console.log(matchedGuess);
 
               for (let card of matchedGuess) {
                 card.dataset.faceup = 0;
                 card.dataset.matched = 1;
-                document.querySelector(`ul li[data-code='${card.dataset.code}']`).dataset.matched = 1;
+                document.querySelector(
+                  `ul li[data-code='${card.dataset.code}']`
+                ).dataset.matched = 1;
               }
               // check if game finished
-              const unmatchedCantons = document.querySelectorAll(`.canton[data-matched='0']`);
-              console.log('cantons left: ' + unmatchedCantons.length);
+              const unmatchedCantons = document.querySelectorAll(
+                `.canton[data-matched='0']`
+              );
+              console.log("cantons left: " + unmatchedCantons.length);
               if (unmatchedCantons.length == 0) {
                 this.finishGame();
               }
             }
             // else fail
             else {
-              const failedGuess = document.querySelectorAll(`.canton[data-faceup='1']`);
+              const failedGuess = document.querySelectorAll(
+                `.canton[data-faceup='1']`
+              );
               setTimeout(() => {
                 for (let card of failedGuess) {
                   card.dataset.faceup = 0;
@@ -107,14 +128,14 @@ export default {
             }
             // reset checks
             this.count = 0;
-            this.guess1 = '';
-            this.guess2 = '';
+            this.guess1 = "";
+            this.guess2 = "";
           }
         }
       }
-    },
+    }
   }
-}
+};
 </script>
 
 <style scoped>
@@ -147,7 +168,7 @@ h4 {
   cursor: pointer;
 }
 [data-matched="1"] {
-  background-color: rgba(0,97,80,0.6);
+  background-color: rgba(0, 97, 80, 0.6);
 }
 
 .canton span {
@@ -166,7 +187,7 @@ h4 {
   right: 0;
   bottom: 0;
   left: 0;
-  background-image: url('../assets/switzerland.svg');
+  background-image: url("../../static/switzerland.svg");
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
