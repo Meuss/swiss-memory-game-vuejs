@@ -21,6 +21,7 @@
 - understand how vue transitions work
 - get some more webpack knowledge
 - use axios for the leaderboard data
+- learn vue composition api (2021)
 
 ## Build Setup
 
