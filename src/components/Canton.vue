@@ -4,23 +4,20 @@
       <div
         class="canton"
         v-for="(canton, index) in shuffleArrayTwice(cantons)"
+        :key="`canton-${index}`"
         :data-code="canton.code"
         :data-matched="canton.matched"
         :data-faceup="canton.faceUp"
         @click="handleClick($event)"
       >
-        <transition-group name="fade" mode="out-in">
+        <div>
           <div class="swissflag" key="1"></div>
           <img :src="canton.img" :alt="canton.code" key="2" />
-        </transition-group>
+        </div>
       </div>
     </div>
     <ul>
-      <li
-        v-for="(canton, key) in cantonsOnce(cantons)"
-        :data-code="canton.code"
-        :data-matched="canton.matched"
-      >
+      <li v-for="(canton, key) in cantonsOnce(cantons)" :key="`canton-${key}`" :data-code="canton.code" :data-matched="canton.matched">
         {{ canton.name }}
       </li>
     </ul>
@@ -28,117 +25,117 @@
 </template>
 
 <script>
-import cantons from "../assets/cantons.json";
-import bus from "../bus.js";
+import cantonsData from '../assets/cantons.json';
+import { ref, inject } from 'vue';
+
 export default {
-  data() {
-    return {
-      cantons: cantons,
-      guess1: "",
-      guess2: "",
-      count: 0,
-      wait: false,
-      started: false
-    };
-  },
-  mounted: function() {
-    bus.$on("startAppToCanton", function() {
-      bus.$emit("startTimer");
-    });
-  },
-  methods: {
-    handleClick: function(event) {
-      if (this.started === false) {
-        this.started = true;
-        this.startGame();
+  setup() {
+    // data
+    const cantons = ref(cantonsData);
+    const guess1 = ref('');
+    const guess2 = ref('');
+    const count = ref(0);
+    const wait = ref(false);
+    const started = ref(false);
+
+    // bus
+    const emitter = inject('emitter');
+
+    // methods
+    function handleClick(event) {
+      if (started.value === false) {
+        started.value = true;
+        startGame();
       }
-      this.checkGuess(event);
-    },
-    startGame: function() {
-      bus.$emit("startGame");
-    },
-    cantonsOnce: function() {
-      return this.cantons.filter(function(canton, key) {
-        return key < 26;
-      });
-    },
-    shuffleArrayTwice: function(array) {
+      checkGuess(event);
+    }
+    function startGame() {
+      emitter.emit('startGame');
+    }
+    function cantonsOnce() {
+      return cantons.value.filter((canton, key) => key < 26);
+    }
+    function shuffleArrayTwice(array) {
       let newArray = array.slice();
       for (var i = newArray.length - 1; i > 0; i--) {
         var rand = Math.floor(Math.random() * (i + 1));
         [newArray[i], newArray[rand]] = [newArray[rand], newArray[i]];
       }
       return newArray;
-    },
-    finishGame: function() {
-      console.log("ggwp!");
-    },
-    checkGuess: function(event) {
+    }
+    function checkGuess(event) {
       let el = event.target;
-      if (el.dataset.faceup == 0 && this.wait === false) {
-        if (this.count < 2) {
-          if (this.count == 0) {
+      if (el.dataset.faceup == 0 && wait.value === false) {
+        if (count.value < 2) {
+          if (count.value == 0) {
           }
-          this.count += 1;
+          count.value += 1;
           // first guess
-          if (this.count === 1) {
-            this.guess1 = el.dataset.code;
+          if (count.value === 1) {
+            guess1.value = el.dataset.code;
             el.dataset.faceup = 1;
           }
           // second guess
           else {
-            this.wait = true;
-            this.guess2 = el.dataset.code;
+            wait.value = true;
+            guess2.value = el.dataset.code;
             el.dataset.faceup = 1;
             // if match
-            if (this.guess1 === this.guess2) {
-              this.wait = false;
-              const matchedGuess = document.querySelectorAll(
-                `.canton[data-faceup='1']`
-              );
-              // console.log(matchedGuess);
-
+            if (guess1.value === guess2.value) {
+              wait.value = false;
+              const matchedGuess = document.querySelectorAll(`.canton[data-faceup='1']`);
               for (let card of matchedGuess) {
                 card.dataset.faceup = 0;
                 card.dataset.matched = 1;
-                document.querySelector(
-                  `ul li[data-code='${card.dataset.code}']`
-                ).dataset.matched = 1;
+                document.querySelector(`ul li[data-code='${card.dataset.code}']`).dataset.matched = 1;
               }
               // check if game finished
-              const unmatchedCantons = document.querySelectorAll(
-                `.canton[data-matched='0']`
-              );
-              console.log("cantons left: " + unmatchedCantons.length);
+              const unmatchedCantons = document.querySelectorAll(`.canton[data-matched='0']`);
               if (unmatchedCantons.length == 0) {
-                this.finishGame();
+                finishGame();
               }
             }
             // else fail
             else {
-              const failedGuess = document.querySelectorAll(
-                `.canton[data-faceup='1']`
-              );
+              const failedGuess = document.querySelectorAll(`.canton[data-faceup='1']`);
               setTimeout(() => {
                 for (let card of failedGuess) {
                   card.dataset.faceup = 0;
                 }
-                this.wait = false;
+                wait.value = false;
               }, 800);
             }
             // reset checks
-            this.count = 0;
-            this.guess1 = "";
-            this.guess2 = "";
+            count.value = 0;
+            guess1.value = '';
+            guess2.value = '';
           }
         }
       }
     }
-  }
+    function finishGame() {
+      console.log('ggwp! TODO');
+    }
+
+    return {
+      cantons,
+      guess1,
+      guess2,
+      count,
+      wait,
+      started,
+      handleClick,
+      startGame,
+      cantonsOnce,
+      shuffleArrayTwice,
+      checkGuess,
+      finishGame,
+    };
+  },
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .wrapper {
   display: flex;
   justify-content: center;
@@ -167,17 +164,20 @@ h4 {
   border-radius: 3px;
   cursor: pointer;
 }
-[data-matched="1"] {
+[data-matched='1'] {
   background-color: rgba(0, 97, 80, 0.6);
 }
 
-.canton span {
+.canton > div {
   height: 100%;
   pointer-events: none;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  img {
+    pointer-events: none;
+  }
 }
 
 .swissflag {
@@ -187,14 +187,14 @@ h4 {
   right: 0;
   bottom: 0;
   left: 0;
-  background-image: url("../../static/switzerland.svg");
+  background-image: url('../../switzerland.svg');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
 }
 
-[data-faceup="1"] .swissflag,
-[data-matched="1"] .swissflag {
+[data-faceup='1'] .swissflag,
+[data-matched='1'] .swissflag {
   opacity: 0;
   pointer-events: none;
 }
@@ -214,19 +214,9 @@ ul {
   flex-wrap: wrap;
 }
 
-li[data-matched="1"] {
+li[data-matched='1'] {
   text-decoration: line-through;
   opacity: 1;
   background-color: transparent;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 1s;
-}
-
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
 }
 </style>

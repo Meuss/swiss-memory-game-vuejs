@@ -5,8 +5,8 @@
       <h1>Swiss cantons memory game</h1>
       <img class="switzerland" src="./assets/switzerland.svg" />
     </div>
-    <!-- <Stopwatch />
-    <Canton /> -->
+    <Stopwatch />
+    <Canton />
     <a href="https://github.com/Meuss/swiss-memory-game-vuejs" target="_blank" class="github">
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path
@@ -19,10 +19,11 @@
 
 <script>
 import { inject } from 'vue';
-// import Stopwatch from './components/Stopwatch.vue';
-// import Canton from './components/Canton.vue';
+import Stopwatch from './components/Stopwatch.vue';
+import Canton from './components/Canton.vue';
 
 export default {
+  name: 'App',
   setup() {
     const emitter = inject('emitter');
 
@@ -37,6 +38,10 @@ export default {
     return {
       startAppToCanton,
     };
+  },
+  components: {
+    Stopwatch,
+    Canton,
   },
 };
 </script>

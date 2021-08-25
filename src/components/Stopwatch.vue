@@ -1,66 +1,62 @@
 <template>
-  <span id="time" v-html="time" @click="startFFS"> </span>
+  <span id="time" v-html="time"></span>
 </template>
 
 <style></style>
 
 <script>
-import bus from '../bus.js';
+import { ref, computed, onMounted } from 'vue';
 
 export default {
-  data() {
+  setup() {
+    // data
+    const clockstate = ref('stopped');
+    const startTime = ref(Date.now());
+    const currentTime = ref(Date.now());
+    let interval = ref(null);
+
+    // computed
+    const time = computed(() => `${minutes.value}:${seconds.value}`);
+    const milliseconds = computed(() => currentTime.value - startTime.value);
+    const minutes = computed(function () {
+      const min = Math.floor((milliseconds.value / 1000 / 60) % 60);
+      return min >= 10 ? min : '0' + min;
+    });
+    const seconds = computed(function () {
+      const sec = Math.ceil((milliseconds.value / 1000) % 60);
+      return sec >= 10 ? sec : '0' + sec;
+    });
+
+    // mounted
+    onMounted(() => {
+      interval.value = setInterval(updateCurrentTime, 1);
+      clockstate.value = 'started';
+    });
+
+    // methods
+    function updateCurrentTime() {
+      if (clockstate.value == 'started') {
+        currentTime.value = Date.now();
+      }
+    }
+    function reset() {
+      clockstate.value = 'started';
+      startTime.value = Date.now();
+      currentTime.value = Date.now();
+    }
+
     return {
-      clockstate: 'stopped',
-      startTime: Date.now(),
-      currentTime: Date.now(),
-      interval: null,
+      clockstate,
+      startTime,
+      currentTime,
+      interval,
+      time,
+      milliseconds,
+      minutes,
+      seconds,
+      updateCurrentTime,
+      reset,
     };
   },
-  mounted: function () {
-    this.interval = setInterval(this.updateCurrentTime, 1);
-    bus.$on('startTimer', function () {
-      // wtf is wrong here, I can't access any data. Oh well,..
-      ffs();
-    });
-  },
-  destroyed: function () {
-    clearInterval(this.interval);
-  },
-  computed: {
-    time: function () {
-      return this.minutes + ':' + this.seconds;
-    },
-    milliseconds: function () {
-      return this.currentTime - this.$data.startTime;
-    },
-    minutes: function () {
-      var lapsed = this.milliseconds;
-      var min = Math.floor((lapsed / 1000 / 60) % 60);
-      return min >= 10 ? min : '0' + min;
-    },
-    seconds: function () {
-      var lapsed = this.milliseconds;
-      var sec = Math.ceil((lapsed / 1000) % 60);
-      return sec >= 10 ? sec : '0' + sec;
-    },
-  },
-  methods: {
-    startFFS: function () {
-      this.clockstate = 'started';
-    },
-    reset: function () {
-      this.$data.clockstate = 'started';
-      this.$data.startTime = Date.now();
-      this.$data.currentTime = Date.now();
-    },
-    updateCurrentTime: function () {
-      if (this.$data.clockstate == 'started') {
-        this.currentTime = Date.now();
-      }
-    },
-  },
 };
-function ffs() {
-  document.querySelector('#time').click();
-}
 </script>
