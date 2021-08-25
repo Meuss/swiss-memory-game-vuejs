@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="header">
-      <img class="logo" src="./assets/logo.png" />
+      <img class="logo" src="/logo.png" />
       <h1>Swiss cantons memory game</h1>
-      <img class="switzerland" src="./assets/switzerland.svg" />
+      <img class="switzerland" src="/switzerland.svg" />
     </div>
     <Stopwatch />
     <Canton />

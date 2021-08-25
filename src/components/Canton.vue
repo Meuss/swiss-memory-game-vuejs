@@ -187,10 +187,10 @@ h4 {
   right: 0;
   bottom: 0;
   left: 0;
-  background-image: url('../../switzerland.svg');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
+  background-image: url('/switzerland.svg');
 }
 
 [data-faceup='1'] .swissflag,
