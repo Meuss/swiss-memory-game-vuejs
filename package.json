@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "vite build --base=/static/sb/swiss-memory-game/",
+    "build": "vite build",
     "serve": "vite preview"
   },
   "dependencies": {
