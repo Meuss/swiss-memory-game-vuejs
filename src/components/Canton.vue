@@ -135,7 +135,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .wrapper {
   display: flex;
   justify-content: center;
@@ -175,9 +175,9 @@ h4 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  img {
-    pointer-events: none;
-  }
+}
+.canton > div img {
+  pointer-events: none;
 }
 
 .swissflag {

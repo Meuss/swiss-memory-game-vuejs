@@ -46,7 +46,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -54,8 +54,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   background-color: #ddd;
-  height: 100%;
+  min-height: 100%;
   position: relative;
+  padding-bottom: 20px;
 }
 
 .header {
@@ -65,16 +66,16 @@ export default {
   height: 100px;
   width: 90%;
   margin: 0 auto;
-  img {
-    width: auto;
-    height: 30px;
-  }
-  .logo {
-    padding-right: 20px;
-  }
-  .switzerland {
-    padding-left: 20px;
-  }
+}
+.header img {
+  width: auto;
+  height: 30px;
+}
+.header .logo {
+  padding-right: 20px;
+}
+.header .switzerland {
+  padding-left: 20px;
 }
 #time {
   margin-bottom: 10px;
@@ -94,13 +95,13 @@ html,
 body {
   margin: 0;
   height: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 .github {
   padding: 10px 0px;
   bottom: -40px;
   right: -60px;
-  position: absolute;
+  position: fixed;
   background: black;
   color: black;
   box-shadow: -1px -1px 20px 0px rgba(0, 0, 0, 0.3);
@@ -110,10 +111,10 @@ body {
   transform: rotate(-45deg);
   transform-origin: 50% 50%;
   transition: 0.15s ease-out;
-  svg {
-    transform: rotate(45deg);
-    fill: white;
-    height: 25px;
-  }
+}
+.github svg {
+  transform: rotate(45deg);
+  fill: white;
+  height: 25px;
 }
 </style>
